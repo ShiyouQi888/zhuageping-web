@@ -5,7 +5,7 @@ import {
   Settings2, ShieldCheck, Sparkles, TimerReset, Video,
 } from "lucide-react";
 
-const defaultDownloadUrl = "https://zhuageping.aeback.com/windows/v0.1.22/zhuageping-Setup-0.1.22-x64.exe";
+const defaultDownloadUrl = "https://xz.aeback.com/windows/v0.1.22/zhuageping-Setup-0.1.22-x64.exe";
 const githubDownloadUrl = "https://github.com/ShiyouQi888/zhuageping/releases/latest";
 
 function Logo({ zh }: { zh: boolean }) {
