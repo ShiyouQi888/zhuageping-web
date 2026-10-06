@@ -5,7 +5,7 @@ import {
   Settings2, ShieldCheck, Sparkles, TimerReset, Video,
 } from "lucide-react";
 
-const defaultDownloadUrl = "https://xz.aeback.com/windows/v0.1.22/zhuageping-Setup-0.1.22-x64.exe";
+const defaultDownloadUrl = "https://xz.aeback.com/windows/v0.1.23/zhuageping-Setup-0.1.23-x64.exe";
 const githubDownloadUrl = "https://github.com/ShiyouQi888/zhuageping/releases/latest";
 
 function Logo({ zh }: { zh: boolean }) {
@@ -40,7 +40,7 @@ export default function Home({ initialLocale = "zh" }: { initialLocale?: "en" | 
 
       <section className="workflow-section" id="workflow"><div className="shell workflow-grid"><div className="workflow-copy"><div className="kicker">{zh ? "随手记录" : "A QUIET WORKFLOW"}</div><h2>{zh ? "把说明做完，" : "Explain it clearly."}<br />{zh ? "然后继续前进。" : "Then move on."}</h2><div className="steps"><div className="step active"><span>01</span><div><strong>{zh ? "选择" : "Select"}</strong><p>{zh ? "按下 F1，自动识别窗口或选择区域。" : "Press F1 to detect a window or select a region."}</p></div></div><div className="step"><span>02</span><div><strong>{zh ? "编辑" : "Edit"}</strong><p>{zh ? "用最少的工具完成最清晰的表达。" : "Use only the tools needed for a clear explanation."}</p></div></div><div className="step"><span>03</span><div><strong>{zh ? "继续" : "Continue"}</strong><p>{zh ? "保存或置顶参考，不打断当前工作。" : "Save or pin the result without breaking your flow."}</p></div></div></div></div><div className="workflow-image"><Image src="/screenshots/preferences-capture.png" alt={zh ? "抓个屏截图设置界面" : "Zhuageping capture preferences"} fill sizes="(max-width: 900px) 90vw, 600px" /><div className="workflow-note"><TimerReset size={16} /> {zh ? "工具就在你需要的地方。" : "Your tools, right where you need them."}</div></div></div></section>
 
-      <section className="download-section shell" id="download"><div className="download-box"><div><div className="kicker">{zh ? "准备开始" : "READY WHEN YOU ARE"}</div><h2>{zh ? "让下一次说明" : "Make your next explanation"}<br />{zh ? "变得更简单。" : "a little easier."}</h2><p>{zh ? "下载 Windows 版抓个屏，把重要想法留在手边。" : "Download Zhuageping for Windows and keep your best ideas close."}</p></div><div className="download-actions"><a className="button button-primary" href={downloadUrl} target="_blank" rel="noreferrer"><Download size={18} /> {zh ? "下载最新版本" : "Download latest release"}</a><span>Windows 10 / 11 · v0.1.22</span></div></div></section>
+      <section className="download-section shell" id="download"><div className="download-box"><div><div className="kicker">{zh ? "准备开始" : "READY WHEN YOU ARE"}</div><h2>{zh ? "让下一次说明" : "Make your next explanation"}<br />{zh ? "变得更简单。" : "a little easier."}</h2><p>{zh ? "下载 Windows 版抓个屏，把重要想法留在手边。" : "Download Zhuageping for Windows and keep your best ideas close."}</p></div><div className="download-actions"><a className="button button-primary" href={downloadUrl} target="_blank" rel="noreferrer"><Download size={18} /> {zh ? "下载最新版本" : "Download latest release"}</a><span>Windows 10 / 11 · v0.1.23</span></div></div></section>
 
       <footer className="footer shell" id="privacy"><Logo zh={zh} /><div className="footer-links"><a href="https://github.com/ShiyouQi888/zhuageping/blob/main/PRIVACY.md"><ShieldCheck size={14} /> {zh ? "隐私策略" : "Privacy"}</a><a href="https://github.com/ShiyouQi888/zhuageping"><Github size={14} /> GitHub</a><a href="mailto:blacklaw@foxmail.com"><CircleHelp size={14} /> {zh ? "联系作者" : "Contact"}</a></div><p>© 2026 Zhuageping. {zh ? "为专注工作而生。" : "Made for focused work."}</p></footer>
     </main>

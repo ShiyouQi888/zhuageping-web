@@ -13,15 +13,15 @@ The managed `r2.dev` URL remains available for testing, but production downloads
 ## Recommended bucket layout
 
 ```text
-windows/v0.1.22/zhuageping-Setup-0.1.22-x64.exe
-windows/v0.1.22/latest.yml
-windows/v0.1.22/zhuageping-Setup-0.1.22-x64.exe.blockmap
+windows/v0.1.23/zhuageping-Setup-0.1.23-x64.exe
+windows/v0.1.23/latest.yml
+windows/v0.1.23/zhuageping-Setup-0.1.23-x64.exe.blockmap
 ```
 
 Use a production custom domain such as:
 
 ```text
-https://xz.aeback.com/windows/v0.1.22/zhuageping-Setup-0.1.22-x64.exe
+https://xz.aeback.com/windows/v0.1.23/zhuageping-Setup-0.1.23-x64.exe
 ```
 
 Cloudflare recommends a custom domain for production R2 traffic. The managed `r2.dev` URL is intended for development and is rate-limited. A custom domain also enables Cloudflare caching and security controls.
