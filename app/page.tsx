@@ -16,24 +16,27 @@ import {
 } from "lucide-react";
 
 const defaultDownloadUrl = "https://zhuageping.aeback.com/windows/v0.1.22/zhuageping-Setup-0.1.22-x64.exe";
-const downloadUrl = process.env.NEXT_PUBLIC_WINDOWS_DOWNLOAD_URL ?? defaultDownloadUrl;
+const githubDownloadUrl = "https://github.com/ShiyouQi888/zhuageping/releases/latest";
 
-function Logo() {
+function Logo({ zh }: { zh: boolean }) {
   return (
     <a className="brand" href="#top" aria-label="Zhuageping home">
       <Image src="/logo.png" alt="Zhuageping logo" width={34} height={34} priority />
-      <span>抓个屏</span>
+      <span>{zh ? "抓个屏" : "Zhuageping"}</span>
     </a>
   );
 }
 
 export default function Home({ initialLocale = "zh" }: { initialLocale?: "en" | "zh" }) {
   const zh = initialLocale === "zh";
+  const downloadUrl = zh
+    ? process.env.NEXT_PUBLIC_WINDOWS_DOWNLOAD_URL ?? defaultDownloadUrl
+    : githubDownloadUrl;
 
   return (
     <main id="top">
       <nav className="nav shell">
-        <Logo />
+        <Logo zh={zh} />
         <div className="nav-links">
           <a href="#features">{zh ? "功能" : "Features"}</a>
           <a href="#workflow">{zh ? "使用方式" : "How it works"}</a>
@@ -63,7 +66,7 @@ export default function Home({ initialLocale = "zh" }: { initialLocale?: "en" | 
         </div>
         <div className="hero-visual" aria-label="Screenshot editor preview">
           <div className="visual-glow" />
-          <div className="window-chrome"><span /><span /><span /><strong>{zh ? "抓个屏 · 截图编辑器" : "抓个屏 · Screenshot editor"}</strong><small>1280 × 720</small></div>
+          <div className="window-chrome"><span /><span /><span /><strong>{zh ? "抓个屏 · 截图编辑器" : "Zhuageping · Screenshot editor"}</strong><small>1280 × 720</small></div>
           <div className="editor-stage">
             <Image src="/screenshots/editor-toolbar.png" alt="Zhuageping screenshot annotation toolbar" fill sizes="(max-width: 900px) 90vw, 680px" priority />
             <div className="selection-label">1,280 × 720</div>
@@ -88,7 +91,7 @@ export default function Home({ initialLocale = "zh" }: { initialLocale?: "en" | 
 
       <section className="download-section shell" id="download"><div className="download-box"><div><div className="kicker">{zh ? "随时开始" : "READY WHEN YOU ARE"}</div><h2>{zh ? <>让下一次说明<br />变得更简单。</> : <>Make your next explanation<br />a little easier.</>}</h2><p>{zh ? "下载 Windows 版抓个屏，把重要想法留在手边。" : "Download Zhuageping for Windows and keep your best ideas close."}</p></div><div className="download-actions"><a className="button button-primary" href={downloadUrl} target="_blank" rel="noreferrer"><Download size={18} /> {zh ? "下载最新版本" : "Download latest release"}</a><span>Windows 10 / 11 · v0.1.22</span></div></div></section>
 
-      <footer className="footer shell" id="privacy"><Logo /><div className="footer-links"><a href="https://github.com/ShiyouQi888/zhuageping/blob/main/PRIVACY.md">Privacy</a><a href="https://github.com/ShiyouQi888/zhuageping">GitHub</a><a href="mailto:blacklaw@foxmail.com">Contact</a></div><p>© 2026 Zhuageping. Made for focused work.</p></footer>
+      <footer className="footer shell" id="privacy"><Logo zh={zh} /><div className="footer-links"><a href="https://github.com/ShiyouQi888/zhuageping/blob/main/PRIVACY.md">Privacy</a><a href="https://github.com/ShiyouQi888/zhuageping">GitHub</a><a href="mailto:blacklaw@foxmail.com">Contact</a></div><p>© 2026 Zhuageping. Made for focused work.</p></footer>
     </main>
   );
 }
