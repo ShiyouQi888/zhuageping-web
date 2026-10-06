@@ -1,97 +1,48 @@
 import Image from "next/image";
 import {
-  ArrowRight,
-  Check,
-  ChevronDown,
-  Download,
-  Github,
-  LockKeyhole,
-  MonitorUp,
-  MousePointer2,
-  Play,
-  ScanText,
-  Sparkles,
-  TimerReset,
-  Video,
+  ArrowRight, BookOpen, Check, ChevronDown, CircleHelp, Download, Github,
+  Keyboard, Layers3, LockKeyhole, MonitorUp, MousePointer2, ScanText,
+  Settings2, ShieldCheck, Sparkles, TimerReset, Video,
 } from "lucide-react";
 
 const defaultDownloadUrl = "https://zhuageping.aeback.com/windows/v0.1.22/zhuageping-Setup-0.1.22-x64.exe";
 const githubDownloadUrl = "https://github.com/ShiyouQi888/zhuageping/releases/latest";
 
 function Logo({ zh }: { zh: boolean }) {
-  return (
-    <a className="brand" href="#top" aria-label="Zhuageping home">
-      <Image src="/logo.png" alt="Zhuageping logo" width={34} height={34} priority />
-      <span>{zh ? "抓个屏" : "Zhuageping"}</span>
-    </a>
-  );
+  return <a className="brand" href="#top" aria-label="Zhuageping home"><Image src="/logo.png" alt="Zhuageping logo" width={34} height={34} priority /><span>{zh ? "抓个屏" : "Zhuageping"}</span></a>;
+}
+
+function FeatureCard({ icon, index, title, description, className = "" }: { icon: React.ReactNode; index: string; title: string; description: string; className?: string }) {
+  return <article className={`feature-card ${className}`}><div className="feature-top"><span className="icon-box">{icon}</span><span className="feature-index">{index}</span></div><h3>{title}</h3><p>{description}</p></article>;
+}
+
+function TutorialStep({ number, title, description, shortcut }: { number: string; title: string; description: string; shortcut: string }) {
+  return <article className="tutorial-step"><span className="tutorial-number">{number}</span><div><span className="shortcut-chip"><Keyboard size={14} /> {shortcut}</span><h3>{title}</h3><p>{description}</p></div></article>;
 }
 
 export default function Home({ initialLocale = "zh" }: { initialLocale?: "en" | "zh" }) {
   const zh = initialLocale === "zh";
-  const downloadUrl = zh
-    ? process.env.NEXT_PUBLIC_WINDOWS_DOWNLOAD_URL ?? defaultDownloadUrl
-    : githubDownloadUrl;
+  const downloadUrl = zh ? process.env.NEXT_PUBLIC_WINDOWS_DOWNLOAD_URL ?? defaultDownloadUrl : githubDownloadUrl;
 
   return (
     <main id="top">
-      <nav className="nav shell">
-        <Logo zh={zh} />
-        <div className="nav-links">
-          <a href="#features">{zh ? "功能" : "Features"}</a>
-          <a href="#workflow">{zh ? "使用方式" : "How it works"}</a>
-          <a href="#privacy">{zh ? "隐私" : "Privacy"}</a>
-          <a href="https://github.com/ShiyouQi888/zhuageping" target="_blank" rel="noreferrer" className="github-link">
-            <Github size={16} /> GitHub
-          </a>
-        </div>
-        <div className="nav-actions">
-          <a className="language" href={zh ? "/en" : "/zh"} aria-label={zh ? "Switch to English" : "切换到中文"}>{zh ? "English" : "简体中文"} <ChevronDown size={15} /></a>
-          <a className="button button-small button-primary" href={downloadUrl} target="_blank" rel="noreferrer">
-            <Download size={16} /> Download
-          </a>
-        </div>
-      </nav>
+      <nav className="nav shell"><Logo zh={zh} /><div className="nav-links"><a href="#features">{zh ? "功能" : "Features"}</a><a href="#guide">{zh ? "教程" : "Guide"}</a><a href="#workflow">{zh ? "工作流" : "Workflow"}</a><a href="#privacy">{zh ? "隐私" : "Privacy"}</a><a href="https://github.com/ShiyouQi888/zhuageping" target="_blank" rel="noreferrer" className="github-link"><Github size={16} /> GitHub</a></div><div className="nav-actions"><a className="language" href={zh ? "/en" : "/zh"} aria-label={zh ? "Switch to English" : "切换到中文"}>{zh ? "English" : "简体中文"} <ChevronDown size={15} /></a><a className="button button-small button-primary" href={downloadUrl} target="_blank" rel="noreferrer"><Download size={16} /> {zh ? "下载" : "Download"}</a></div></nav>
 
-      <section className="hero shell">
-        <div className="hero-copy">
-          <div className="eyebrow"><span className="eyebrow-dot" /> {zh ? "为 Windows 打造，让工作更专注" : "Built for Windows, made for flow"}</div>
-          <h1>{zh ? <>记录每个瞬间。<br /><em>保持专注。</em></> : <>Capture the moment.<br /><em>Keep your focus.</em></>}</h1>
-          <p className="hero-lede">{zh ? "抓个屏是一款快速、私密的 Windows 截图与录屏工具，专为屏幕上的工作而生。" : "Zhuageping is a fast, private screenshot and screen recording tool for the work happening on your screen."}</p>
-          <div className="hero-actions">
-            <a className="button button-primary" href={downloadUrl} target="_blank" rel="noreferrer"><Download size={18} /> {zh ? "下载 Windows 版" : "Download for Windows"} <ArrowRight size={17} /></a>
-            <a className="button button-quiet" href="#workflow"><Play size={17} /> {zh ? "了解使用方式" : "See how it works"}</a>
-          </div>
-          <div className="hero-meta"><span><Check size={15} /> {zh ? "免费使用" : "Free to use"}</span><span><LockKeyhole size={15} /> {zh ? "本地优先" : "Local-first"}</span><span>Windows 10 / 11</span></div>
-        </div>
-        <div className="hero-visual" aria-label="Screenshot editor preview">
-          <div className="visual-glow" />
-          <div className="window-chrome"><span /><span /><span /><strong>{zh ? "抓个屏 · 截图编辑器" : "Zhuageping · Screenshot editor"}</strong><small>1280 × 720</small></div>
-          <div className="editor-stage">
-            <Image src="/screenshots/preferences-capture.png" alt="Zhuageping capture preferences" fill sizes="(max-width: 900px) 90vw, 680px" priority />
-            <div className="selection-label">1,280 × 720</div>
-          </div>
-          <div className="visual-caption"><span className="recording-dot" /> {zh ? "随时开始" : "Ready when you are"} <span>F1</span></div>
-        </div>
-      </section>
+      <section className="hero shell"><div className="hero-copy"><div className="eyebrow"><span className="eyebrow-dot" /> {zh ? "Windows 本地优先工作工具" : "A local-first Windows work tool"}</div><h1>{zh ? "把屏幕上的" : "Keep what matters"}<br /><em>{zh ? "重要内容留下来。" : "on your screen."}</em></h1><p className="hero-lede">{zh ? "抓个屏让截图、录屏、标注、取色、OCR 和置顶参考，变成一个安静而顺手的工作流。" : "Zhuageping brings capture, recording, annotation, color picking, OCR, and pinned references into one calm workflow."}</p><div className="hero-actions"><a className="button button-primary" href={downloadUrl} target="_blank" rel="noreferrer"><Download size={18} /> {zh ? "下载 Windows 版" : "Download for Windows"} <ArrowRight size={17} /></a><a className="button button-quiet" href="#guide"><BookOpen size={17} /> {zh ? "查看使用教程" : "Read the quick guide"}</a></div><div className="hero-meta"><span><Check size={15} /> {zh ? "免费使用" : "Free to use"}</span><span><LockKeyhole size={15} /> {zh ? "本地处理" : "Local processing"}</span><span>Windows 10 / 11</span></div></div><div className="hero-visual" aria-label={zh ? "抓个屏截图设置预览" : "Zhuageping capture settings preview"}><div className="visual-glow" /><div className="window-chrome"><span /><span /><span /><strong>{zh ? "抓个屏 · 截图" : "Zhuageping · Capture"}</strong><small>F1</small></div><div className="editor-stage"><Image src="/screenshots/preferences-capture.png" alt={zh ? "抓个屏截图设置" : "Zhuageping capture preferences"} fill sizes="(max-width: 900px) 90vw, 680px" priority /><div className="selection-label">F1 · Ready</div></div><div className="visual-caption"><span className="recording-dot" /> {zh ? "准备开始" : "Ready when you are"} <span>Windows</span></div></div></section>
 
-      <section className="proof-strip"><div className="shell proof-inner"><span>{zh ? "一个安静的工作空间，满足" : "One calm workspace for"}</span><div><MonitorUp size={18} /> {zh ? "截图" : "screenshots"}</div><div><Video size={18} /> {zh ? "录屏" : "recordings"}</div><div><ScanText size={18} /> OCR</div><div><MousePointer2 size={18} /> {zh ? "标注" : "annotations"}</div></div></section>
+      <section className="proof-strip"><div className="shell proof-inner"><span>{zh ? "为日常工作准备的完整工具箱" : "A complete toolkit for everyday work"}</span><div><MonitorUp size={18} /> {zh ? "截图" : "Capture"}</div><div><Video size={18} /> {zh ? "录屏" : "Record"}</div><div><ScanText size={18} /> OCR</div><div><MousePointer2 size={18} /> {zh ? "标注" : "Annotate"}</div></div></section>
 
-      <section className="section shell" id="features">
-        <div className="section-heading"><div><div className="kicker">{zh ? "完整工具箱" : "THE TOOLKIT"}</div><h2>{zh ? <>展示、说明、记录，<br />需要的一切都在这里。</> : <>Everything you need<br />to show, explain, and remember.</>}</h2></div><p>{zh ? "简洁的控制项不会打扰你。常用工具，一个快捷键即可呼出。" : "Simple controls stay out of your way. The right tool is always one shortcut away."}</p></div>
-        <div className="feature-grid">
-          <article className="feature-card feature-wide dark-card"><div className="feature-top"><span className="icon-box"><MonitorUp size={20} /></span><span className="feature-index">01</span></div><h3>{zh ? "精准截图" : "Capture precisely"}</h3><p>{zh ? "选择区域、窗口、屏幕或滚动页面。多屏识别从第一次点击开始就已准备好。" : "Pick a region, window, screen, or scrolling page. Multi-monitor aware from the first click."}</p><div className="mini-selection"><span>{zh ? "已识别窗口" : "Window detected"}</span><i /></div></article>
-          <article className="feature-card"><div className="feature-top"><span className="icon-box orange"><Sparkles size={20} /></span><span className="feature-index">02</span></div><h3>{zh ? "清晰标注" : "Annotate clearly"}</h3><p>{zh ? "箭头、形状、文字、模糊、马赛克、取色器，以及贴近工作区域的工具栏。" : "Arrows, shapes, text, blur, mosaic, color picker, and a toolbar that stays close to your work."}</p><div className="tool-pills"><span>↗</span><span>T</span><span>◌</span><span>▦</span><span>✓</span></div></article>
-          <article className="feature-card"><div className="feature-top"><span className="icon-box blue"><Video size={20} /></span><span className="feature-index">03</span></div><h3>{zh ? "流畅录屏" : "Record smoothly"}</h3><p>{zh ? "使用 Windows 原生能力录制全屏、窗口或自定义矩形区域。" : "Capture a full screen, window, or custom rectangle with native Windows recording."}</p><div className="record-preview"><span className="recording-dot" /> REC <strong>00:24</strong><button aria-label={zh ? "停止录制" : "Stop recording"}>■</button></div></article>
-          <article className="feature-card feature-wide"><div className="feature-top"><span className="icon-box green"><LockKeyhole size={20} /></span><span className="feature-index">04</span></div><h3>{zh ? "默认保护隐私" : "Private by default"}</h3><p>{zh ? "截图、录屏、OCR 和设置都留在你的电脑上。不需要账号，不上传云端，不做数据分析。" : "Your screenshots, recordings, OCR, and settings stay on your machine. No account. No cloud uploads. No analytics."}</p><div className="privacy-line"><LockKeyhole size={15} /> {zh ? "仅保存本地文件" : "Local files only"}</div></article>
-        </div>
-      </section>
+      <section className="section shell" id="features"><div className="section-heading"><div><div className="kicker">{zh ? "核心功能" : "THE TOOLKIT"}</div><h2>{zh ? "少一点打断，" : "Less interruption."}<br />{zh ? "多一点完成。" : "More done."}</h2></div><p>{zh ? "从第一次按下 F1，到最后保存文件，所有工具都围绕你的屏幕工作。" : "From the first press of F1 to the final save, every tool is built around the work on your screen."}</p></div><div className="feature-grid"><FeatureCard className="dark-card feature-wide" index="01" icon={<MonitorUp size={20} />} title={zh ? "精准截图" : "Capture precisely"} description={zh ? "区域、窗口、屏幕和滚动页面都能快速捕捉，多屏环境自动跟随鼠标。" : "Capture a region, window, display, or scrolling page. Multi-monitor aware from the first click."} /><FeatureCard index="02" icon={<Sparkles size={20} />} title={zh ? "清晰标注" : "Annotate clearly"} description={zh ? "箭头、形状、文字、马赛克、模糊和取色器，直接在截图上完成说明。" : "Add arrows, shapes, text, mosaic, blur, and color samples directly on the capture."} /><FeatureCard index="03" icon={<Video size={20} />} title={zh ? "原生录屏" : "Native recording"} description={zh ? "录制全屏、指定显示器或自定义区域，控制条位于录制画面之外。" : "Record a full screen, display, or custom region while the controls stay outside the video."} /><FeatureCard index="04" icon={<ScanText size={20} />} title={zh ? "本地 OCR" : "Local OCR"} description={zh ? "从当前截图区域提取文字，结果自动复制到剪贴板，不上传图片。" : "Extract text from the current capture, copy the result, and keep the image offline."} /><FeatureCard className="feature-wide" index="05" icon={<LockKeyhole size={20} />} title={zh ? "默认保护隐私" : "Private by default"} description={zh ? "截图、录屏、OCR、历史和设置都保存在你的电脑上。不需要账号，不做云端分析。" : "Screenshots, recordings, OCR, history, and settings stay on your machine. No account or cloud analytics."} /></div></section>
 
-      <section className="workflow-section" id="workflow"><div className="shell workflow-grid"><div className="workflow-copy"><div className="kicker">{zh ? "安静的工作流" : "A QUIET WORKFLOW"}</div><h2>{zh ? <>从想法到<br />可分享，只需几秒。</> : <>From thought<br />to shareable in seconds.</>}</h2><div className="steps"><div className="step active"><span>01</span><div><strong>{zh ? "按下 F1" : "Press F1"}</strong><p>{zh ? "不用离开当前窗口，即可呼出截图覆盖层。" : "Bring up the capture overlay without leaving your current window."}</p></div></div><div className="step"><span>02</span><div><strong>{zh ? "让内容更清楚" : "Make it clear"}</strong><p>{zh ? "添加标注、隐藏敏感信息，或使用 OCR 提取文字。" : "Annotate, blur sensitive details, or pull text with OCR."}</p></div></div><div className="step"><span>03</span><div><strong>{zh ? "保存或置顶" : "Save or pin"}</strong><p>{zh ? "复制、保存到本地、置顶参考，然后继续工作。" : "Copy, save locally, pin for reference, and get back to work."}</p></div></div></div></div><div className="workflow-image"><Image src="/screenshots/preferences-record.png" alt={zh ? "抓个屏录屏设置界面" : "Zhuageping recording preferences"} fill sizes="(max-width: 900px) 90vw, 600px" /><div className="workflow-note"><TimerReset size={16} /> {zh ? "工具就在你需要的地方。" : "Your tools, right where you need them."}</div></div></div></section>
+      <section className="showcase-section"><div className="shell showcase-grid"><div className="showcase-image"><Image src="/screenshots/preferences-record.png" alt={zh ? "抓个屏录屏设置" : "Zhuageping recording settings"} fill sizes="(max-width: 900px) 90vw, 600px" /><span className="image-tag"><Video size={14} /> {zh ? "录屏设置" : "Recording settings"}</span></div><div className="showcase-copy"><div className="kicker">{zh ? "真实界面" : "THE REAL INTERFACE"}</div><h2>{zh ? "看得见的" : "A clear place"}<br />{zh ? "简洁与秩序。" : "for every control."}</h2><p>{zh ? "重新整理的设置界面，把截图、录屏、置顶、输出和快捷键分成清楚的工作区域。" : "A refined preferences window keeps capture, recording, pinning, output, and shortcuts in clear work areas."}</p><div className="showcase-list"><span><Settings2 size={17} /> {zh ? "清晰的设置分类" : "Clear settings categories"}</span><span><Layers3 size={17} /> {zh ? "统一的界面语言" : "Consistent interface language"}</span><span><ShieldCheck size={17} /> {zh ? "本地优先的工作方式" : "Local-first by design"}</span></div><a className="text-link" href="#guide">{zh ? "了解如何开始" : "Learn how to start"} <ArrowRight size={16} /></a></div></div></section>
 
-      <section className="download-section shell" id="download"><div className="download-box"><div><div className="kicker">{zh ? "随时开始" : "READY WHEN YOU ARE"}</div><h2>{zh ? <>让下一次说明<br />变得更简单。</> : <>Make your next explanation<br />a little easier.</>}</h2><p>{zh ? "下载 Windows 版抓个屏，把重要想法留在手边。" : "Download Zhuageping for Windows and keep your best ideas close."}</p></div><div className="download-actions"><a className="button button-primary" href={downloadUrl} target="_blank" rel="noreferrer"><Download size={18} /> {zh ? "下载最新版本" : "Download latest release"}</a><span>Windows 10 / 11 · v0.1.22</span></div></div></section>
+      <section className="tutorial-section section shell" id="guide"><div className="section-heading"><div><div className="kicker">{zh ? "三分钟上手" : "QUICK START"}</div><h2>{zh ? "从第一次按键，" : "From the first key"}<br />{zh ? "到一张完整截图。" : "to a finished capture."}</h2></div><p>{zh ? "不用学习复杂流程，记住几个快捷键，就能覆盖大多数工作场景。" : "You do not need a complex workflow. Remember a few shortcuts and cover most everyday tasks."}</p></div><div className="tutorial-grid"><TutorialStep number="01" shortcut="F1" title={zh ? "呼出截图" : "Start a capture"} description={zh ? "移动鼠标识别窗口或区域，单击选中，拖动即可自定义范围。" : "Move across a window or region, click to select, or drag a custom area."} /><TutorialStep number="02" shortcut="Ctrl + Shift + O" title={zh ? "整理内容" : "Make it clear"} description={zh ? "使用标注、模糊、马赛克和 OCR，把重点说明清楚。" : "Use annotations, blur, mosaic, and OCR to make the important parts clear."} /><TutorialStep number="03" shortcut="Enter" title={zh ? "保存与分享" : "Save and share"} description={zh ? "复制、保存、置顶或打开文件夹，然后回到原来的工作。" : "Copy, save, pin, or open the folder, then return to your work."} /></div><div className="shortcut-panel"><div><Keyboard size={20} /><strong>{zh ? "常用快捷键" : "Useful shortcuts"}</strong></div><span><b>F1</b> {zh ? "截图" : "Capture"}</span><span><b>F2</b> {zh ? "录屏" : "Record"}</span><span><b>F3</b> {zh ? "置顶" : "Pin"}</span><span><b>Esc</b> {zh ? "取消" : "Cancel"}</span><a className="text-link" href="#features">{zh ? "查看全部功能" : "See all features"} <ArrowRight size={15} /></a></div></section>
 
-      <footer className="footer shell" id="privacy"><Logo zh={zh} /><div className="footer-links"><a href="https://github.com/ShiyouQi888/zhuageping/blob/main/PRIVACY.md">Privacy</a><a href="https://github.com/ShiyouQi888/zhuageping">GitHub</a><a href="mailto:blacklaw@foxmail.com">Contact</a></div><p>© 2026 Zhuageping. Made for focused work.</p></footer>
+      <section className="workflow-section" id="workflow"><div className="shell workflow-grid"><div className="workflow-copy"><div className="kicker">{zh ? "随手记录" : "A QUIET WORKFLOW"}</div><h2>{zh ? "把说明做完，" : "Explain it clearly."}<br />{zh ? "然后继续前进。" : "Then move on."}</h2><div className="steps"><div className="step active"><span>01</span><div><strong>{zh ? "选择" : "Select"}</strong><p>{zh ? "按下 F1，自动识别窗口或选择区域。" : "Press F1 to detect a window or select a region."}</p></div></div><div className="step"><span>02</span><div><strong>{zh ? "编辑" : "Edit"}</strong><p>{zh ? "用最少的工具完成最清晰的表达。" : "Use only the tools needed for a clear explanation."}</p></div></div><div className="step"><span>03</span><div><strong>{zh ? "继续" : "Continue"}</strong><p>{zh ? "保存或置顶参考，不打断当前工作。" : "Save or pin the result without breaking your flow."}</p></div></div></div></div><div className="workflow-image"><Image src="/screenshots/preferences-capture.png" alt={zh ? "抓个屏截图设置界面" : "Zhuageping capture preferences"} fill sizes="(max-width: 900px) 90vw, 600px" /><div className="workflow-note"><TimerReset size={16} /> {zh ? "工具就在你需要的地方。" : "Your tools, right where you need them."}</div></div></div></section>
+
+      <section className="download-section shell" id="download"><div className="download-box"><div><div className="kicker">{zh ? "准备开始" : "READY WHEN YOU ARE"}</div><h2>{zh ? "让下一次说明" : "Make your next explanation"}<br />{zh ? "变得更简单。" : "a little easier."}</h2><p>{zh ? "下载 Windows 版抓个屏，把重要想法留在手边。" : "Download Zhuageping for Windows and keep your best ideas close."}</p></div><div className="download-actions"><a className="button button-primary" href={downloadUrl} target="_blank" rel="noreferrer"><Download size={18} /> {zh ? "下载最新版本" : "Download latest release"}</a><span>Windows 10 / 11 · v0.1.22</span></div></div></section>
+
+      <footer className="footer shell" id="privacy"><Logo zh={zh} /><div className="footer-links"><a href="https://github.com/ShiyouQi888/zhuageping/blob/main/PRIVACY.md"><ShieldCheck size={14} /> {zh ? "隐私策略" : "Privacy"}</a><a href="https://github.com/ShiyouQi888/zhuageping"><Github size={14} /> GitHub</a><a href="mailto:blacklaw@foxmail.com"><CircleHelp size={14} /> {zh ? "联系作者" : "Contact"}</a></div><p>© 2026 Zhuageping. {zh ? "为专注工作而生。" : "Made for focused work."}</p></footer>
     </main>
   );
 }
