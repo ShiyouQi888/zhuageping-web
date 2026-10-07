@@ -16,7 +16,7 @@ Open `http://localhost:3000/zh` for the Chinese page or `http://localhost:3000/e
 Set `NEXT_PUBLIC_WINDOWS_DOWNLOAD_URL` to the direct Cloudflare R2 installer URL. The default production URL is:
 
 ```text
-https://xz.aeback.com/windows/v0.1.23/zhuageping-Setup-0.1.23-x64.exe
+https://xz.aeback.com/windows/v0.1.24/zhuageping-Setup-0.1.24-x64.exe
 ```
 
 ```powershell
